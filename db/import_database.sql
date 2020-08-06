@@ -1,6 +1,7 @@
 ################### Database structure START ###################
 
 CREATE DATABASE quantox_task DEFAULT CHARSET = utf8;
+USE quantox_task;
 
 CREATE TABLE students (
     id INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,

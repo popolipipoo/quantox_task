@@ -7,14 +7,15 @@ class DB
 	public function __construct()
 	{
 		try {
+			$config = parse_ini_file(__DIR__ . '/db.ini');
 			$this->db = new PDO(
 				sprintf('mysql:host=%s;port=%s;dbname=%s',
-					'localhost',
-					'3306',
-					'quantox_task'
+					$config['host'],
+					$config['port'],
+					$config['dbname']
 				),
-				'root',
-				'',
+				$config['username'],
+				$config['password'],
 				[
 					PDO::ATTR_PERSISTENT => false,
 					PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8',
@@ -22,9 +23,9 @@ class DB
 				]
 			);
 		} catch (PDOException $e) {
-			die("PDOException: " . $e->getMessage());
+			die('PDOException: ' . $e->getMessage());
 		} catch (Exception $e) {
-			die("Exception: " . $e->getMessage());
+			die('Exception: ' . $e->getMessage());
 		}
 		return $this->db;
 	}
